@@ -5,33 +5,43 @@ serviceNames = [
     "xxx",
     "yyy",
     "zzz"]
+incomeName = "Income after taxes"    
 firstYear = 2011
 lastYear = 2011
 
 pceData = dict()
 
+def getVal(item):
+	return item.value
 
 def loadPCEData():
     for year in range(firstYear, lastYear+1):
-        dataBook = xlrd.open_workbook(filename = ("quintile%d.xls" % year))
+    	pceData[year] = {}
+        dataBook = xlrd.open_workbook(filename = ("data/quintile%d.xls" % year))
         if len(dataBook.sheets()) > 1:
             print "Too many sheets in file: %d" % year
             continue
         allSheets = dataBook.sheets()
         sheet = allSheets[0]
-        for rowIndex in range(sheet.nrows):
+        
+        # Expected format: row 0 has table title, row 1 is empty, row 2 has headers
+        columnHeaders = map(getVal, sheet.row(2)[1:])
+        for rowIndex in range(3,sheet.nrows):
             row = sheet.row(rowIndex)
-            if row[0] == '':
+            item = row[0].value.strip()
+            values = map(getVal, row[1:])
+            if row[0] == '' or len(values) == 0:
+                # skip empty rows/dataless rows
                 continue
-            item = row[0].encode('ascii')
-            values = row[1:]
+
             
             # 0 = all quintiles
             # 1 = Bottom 20%
             # ... 
             # 5 = Top 20%
-            for index in range(len(values)):
-                pceData((item, year, index)) = values[index]
+            pceData[year][item] = values
+    
+    print pceData[2011]
 
 def main():
     loadPCEData()

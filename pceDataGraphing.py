@@ -1,4 +1,5 @@
 import xlrd
+import csv
 import matplotlib as mpl
 import matplotlib.pyplot as plt
 
@@ -9,6 +10,8 @@ serviceNames = [
 incomeName = "Income after taxes"    
 firstYear = 2005
 lastYear = 2013
+txtFirstYear = 1984
+txtLastYear = 2004
 
 allYears = range(firstYear, lastYear+1)
 
@@ -21,6 +24,19 @@ def getFieldValue(fieldName, year, pceData):
 
 def getVal(item):
     return item.value
+
+def loadTxtPCEData():
+    for year in range(txtFirstYear, txtLastYear+1):
+        pceData[year] = {}
+        with open("data/quintile%d.txt" % year, 'rb') as csvfile:
+            reader = csv.reader(csvfile, delimiter=' ')
+            for row in reader[2:]:
+                if len(row) < 8:
+                    continue
+                item = row[0].value.strip([' ','.'])
+                # We skip the first and last column, which contain "TOTAL and INCMPL"
+                values = map(getVal, row[2:7])
+                pceData[year][item] = values
 
 def loadPCEData():
     pceData = {}

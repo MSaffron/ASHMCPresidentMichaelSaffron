@@ -10,6 +10,8 @@ incomeName = "Income after taxes"
 firstYear = 2005
 lastYear = 2013
 
+allYears = range(firstYear, lastYear+1)
+
 def getFieldValue(fieldName, year, pceData):
   for name in aliases[fieldName]:
     if pceData[year].has_key(name):
@@ -48,7 +50,10 @@ def loadPCEData():
             # ... 
             # 5 = Top 20%
             pceData[year][item] = values
-    
+    return pceData
+
+# pceData is a dictionary of with year keys and dictionary values. 
+# The dictionary values are dictionaries from fields to a list of values.
 def plotData(field, pceData):
     print "Plotting", field
     data = {}
@@ -95,8 +100,19 @@ def plotData(field, pceData):
     print 'saved file to %s' % filename
 
 
-def isolateIncome(pceData):
-  for 
+def printAllFields():
+    pceData = loadPCEData()
+    fields = set()
+
+    for year in allYears:
+        yearFields = pceData[year]
+        for field in yearFields:
+            fields.add(field)
+
+    listOfFields = list(fields)
+    listOfFields.sort()
+    for field in listOfFields:
+        print field
 
 def main():
     pceData = loadPCEData()

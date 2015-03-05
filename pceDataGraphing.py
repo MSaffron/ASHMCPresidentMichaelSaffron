@@ -34,14 +34,20 @@ def getVal(item):
 def loadTxtPCEData():
     for year in range(txtFirstYear, txtLastYear+1):
         pceData[year] = {}
-        with open("data/quintile%d.txt" % year, 'rb') as csvfile:
-            reader = csv.reader(csvfile, delimiter=' ')
-            for row in reader[2:]:
-                if len(row) < 8:
+        with open("data/quintile%d.txt" % year, 'rb') as datafile:
+            for line in datafile:
+                # Gross fix, this should work though
+                endofname = line.rfind('..')
+                if endofname == -1:
+                    endofname = line.rfind('.')
+
+                row = line[endofname + 1:].split()
+                item = line[:endofname].strip('. ')
+                if len(row) < 8 or endofname == -1:
                     continue
-                item = row[0].value.strip([' ','.'])
+
                 # We skip the first and last column, which contain "TOTAL and INCMPL"
-                values = map(getVal, row[2:7])
+                values = map(float, row[1:6])
                 pceData[year][item] = values
 
 def loadPCEData():

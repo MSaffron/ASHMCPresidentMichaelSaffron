@@ -26,17 +26,20 @@ def getVal(item):
     return item.value
 
 def loadTxtPCEData():
+    pceData = {}
     for year in range(txtFirstYear, txtLastYear+1):
         pceData[year] = {}
         with open("data/quintile%d.txt" % year, 'rb') as csvfile:
             reader = csv.reader(csvfile, delimiter=' ')
-            for row in reader[2:]:
+            for row in reader:
                 if len(row) < 8:
                     continue
-                item = row[0].value.strip([' ','.'])
+                item = row[0].strip(' .')
                 # We skip the first and last column, which contain "TOTAL and INCMPL"
-                values = map(getVal, row[2:7])
+                values = map(int, row[2:7])
                 pceData[year][item] = values
+
+    return pceData
 
 def loadPCEData():
     pceData = {}
@@ -118,9 +121,15 @@ def plotData(field, pceData):
 
 def printAllFields():
     pceData = loadPCEData()
+    txtPCEData = loadTxtPCEData()
     fields = set()
 
-    for year in allYears:
+    for year in range(2005, 2014):
+        yearFields = pceData[year]
+        for field in yearFields:
+            fields.add(field)
+
+    for year in range(1984, 2005):
         yearFields = pceData[year]
         for field in yearFields:
             fields.add(field)
@@ -131,11 +140,13 @@ def printAllFields():
         print field
 
 def main():
-    pceData = loadPCEData()
-    incomeData = isolateIncome(pceData)
-    for field in pceData[lastYear]:
-      if (field != "Item") and (field != "Never attended and other"):
-        plotData(field, pceData)
+    # pceData = loadPCEData()
+    # incomeData = isolateIncome(pceData)
+    # for field in pceData[lastYear]:
+    #   if (field != "Item") and (field != "Never attended and other"):
+    #     plotData(field, pceData)
+
+    printAllFields()
 
 if __name__ == "__main__":
     main()

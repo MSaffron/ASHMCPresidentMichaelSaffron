@@ -23,10 +23,10 @@ serviceNames = [
 
 incomeName = "Income after taxes"    
 firstYear = 2005
-lastYear = 2011
+lastYear = 2013
 txtFirstYear = 1984
 txtLastYear = 2004
-allYears = range(firstYear, lastYear+1)
+allYears = range(txtFirstYear, lastYear+1)
 
 def getVal(item):
     return item.value
@@ -58,7 +58,7 @@ def loadTxtPCEData():
 
 def loadPCEData():
     pceData = {}
-    for year in allYears:
+    for year in range(firstYear, lastYear+1):
         pceData[year] = {}
         dataBook = xlrd.open_workbook(filename = ("data/quintile%d.xls" % year))
         if len(dataBook.sheets()) > 1:
@@ -116,13 +116,13 @@ def printAllFields():
     txtPCEData = loadTxtPCEData()
     fields = set()
 
-    for year in range(2005, 2014):
+    for year in range(firstYear, lastYear):
         yearFields = pceData[year]
         for field in yearFields:
             fields.add(field)
 
-    for year in range(1984, 2005):
-        yearFields = pceData[year]
+    for year in range(txtFirstYear, txtLastYear+1):
+        yearFields = txtPCEData[year]
         for field in yearFields:
             fields.add(field)
 

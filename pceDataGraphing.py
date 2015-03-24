@@ -40,13 +40,15 @@ def loadTxtPCEData(pceData):
         pceData[year] = {}
         print "Processing", year
         with open("data/quintile%d.txt" % year, 'rb') as datafile:
+            for i in range(3):
+                datafile.readline()
             for line in datafile:
                 # Gross fix, this should work though
                 endofname = line.rfind('..')
                 if endofname == -1:
                     endofname = line.rfind('.')
 
-                row = line[endofname + 1:].split()
+                row = line[endofname + 1:].replace('$','').replace(',','').replace('(','-').replace(')','').replace('|','').replace('n.a.','0').replace('b/','0').replace('c/','').replace('d/','').split()
                 item = line[:endofname].strip('. ')
                 if len(row) < 8 or endofname == -1 or (
                    item not in serviceNames and item not in aliases):
@@ -112,9 +114,15 @@ def plotData(field, pceData):
 
 def printAllFields():
     pceData = loadPCEData()
+    txtPCEData = loadTxtPCEData()
     fields = set()
 
-    for year in allYears:
+    for year in range(2005, 2014):
+        yearFields = pceData[year]
+        for field in yearFields:
+            fields.add(field)
+
+    for year in range(1984, 2005):
         yearFields = pceData[year]
         for field in yearFields:
             fields.add(field)

@@ -22,18 +22,23 @@ serviceNames = [
     ]
 
 incomeName = "Income after taxes"    
-firstYear = 2005
-lastYear = 2011
+xlsFirstYear = 2005
+xlsLastYear = 2011
 txtFirstYear = 1984
 txtLastYear = 2004
+firstYear = txtFirstYear
+lastYear = xlsLastYear
+allTXTYears = range(txtFirstYear, txtLastYear+1)
+allXLSYears = range(xlsFirstYear, xlsLastYear+1)
 allYears = range(firstYear, lastYear+1)
 
 def getVal(item):
     return item.value
 
-def loadTxtPCEData():
-    for year in range(txtFirstYear, txtLastYear+1):
+def loadTxtPCEData(pceData):
+    for year in allTXTYears:
         pceData[year] = {}
+        print "Processing", year
         with open("data/quintile%d.txt" % year, 'rb') as datafile:
             for line in datafile:
                 # Gross fix, this should work though
@@ -43,16 +48,16 @@ def loadTxtPCEData():
 
                 row = line[endofname + 1:].split()
                 item = line[:endofname].strip('. ')
-                if len(row) < 8 or endofname == -1:
+                if len(row) < 8 or endofname == -1 or (
+                   item not in serviceNames and item not in aliases):
                     continue
 
                 # We skip the first and last column, which contain "TOTAL and INCMPL"
                 values = map(float, row[1:6])
                 pceData[year][item] = values
 
-def loadPCEData():
-    pceData = {}
-    for year in allYears:
+def loadXlsPCEData(pceData):
+    for year in allXLSYears:
         pceData[year] = {}
         dataBook = xlrd.open_workbook(filename = ("data/quintile%d.xls" % year))
         if len(dataBook.sheets()) > 1:
@@ -135,7 +140,9 @@ def convertData(pceData):
   return result
 
 def main():
-    pceData = loadPCEData()
+    pceData = {}
+    loadXlsPCEData(pceData)
+    loadTxtPCEData(pceData)
     cleanData = convertData(pceData)
     for service in serviceNames:
       plotData(service, cleanData)

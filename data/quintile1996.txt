@@ -135,10 +135,9 @@ Average annual expenditures.................................|       $33,797|    
   Wages and salaries........................................|        29,560|        29,560|         1,989|         8,084|        20,576|        38,665|        78,324|             0
   Self-employment income....................................|         2,318|         2,318|           -78|           356|         1,058|         2,200|         8,037|             0
   Social Security, private and government retirement........|         4,334|         4,334|         3,211|         6,178|         5,142|         3,682|         3,458|             0
-  Interest, dividends, rental income, other property income.|           761|           761|            74|           306|           548|           851|         2,024|             0
-  Unemployment and workers' compensation, veterans' benefits|           213|           213|            97|           212|           257|           278|           219|             0
-  Public assistance, supplemental security income, food     |              |              |              |              |              |              |              |              
-     stamps.................................................|           437|           437|           953|           700|           335|           156|            45|             0
+  Interest, dividends, rental income, other property income..|           761|           761|            74|           306|           548|           851|         2,024|             0
+  Unemployment and workers' compensation, veterans' benefits..|           213|           213|            97|           212|           257|           278|           219|             0
+  Public assistance, supplemental security income, food stamps..|           437|           437|           953|           700|           335|           156|            45|             0
   Regular contributions for support.........................|           243|           243|           155|           222|           226|           349|           262|             0
   Other income..............................................|           148|           148|           143|           146|           180|           114|           154|             0
  Personal taxes 1/..........................................|         3,150|         3,150|           177|           408|         1,776|         3,849|         9,520|             0

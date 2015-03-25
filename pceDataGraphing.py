@@ -84,7 +84,10 @@ def loadTxtPCEData(pceData):
                 if ("Gift" in item) or (len(row) > 0 and "Gift" in row[0]):
                   break
 
-                if len(row) < 7 or endofname == -1 or (item not in serviceNames and item not in aliases):
+                rowLen = 8
+                if year == 2004:
+                  rowLen = 7
+                if len(row) < rowLen or endofname == -1 or (item not in serviceNames and item not in aliases):
                     continue
 
                 serviceName = item
@@ -92,7 +95,10 @@ def loadTxtPCEData(pceData):
                   serviceName = aliases[item]
             
                 # We skip the first and last column, which contain "TOTAL and INCMPL"
-                values = map(float, row[1:7])
+                if year == 2004:
+                  values = map(float, row[1:7])
+                else:
+                  values = map(float, row[2:8])
                 pceData[year][serviceName] = values
 
 def loadXlsPCEData(pceData):

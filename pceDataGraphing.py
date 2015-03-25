@@ -4,24 +4,56 @@ import matplotlib as mpl
 import matplotlib.pyplot as plt
 
 aliases = {
-  "xXx" : "xxx",
-  "ye olde zzz" : "zzz",
-  "z" : "zzz"
+  "Income after taxes 1/" : "Income after taxes",
+  "Income after taxes(1)" : "Income after taxes",
+  "Income after taxes a/" : "Income after taxes",
+  "Main., rep., ins., other expenses" : "Owned dwelling maintenance, repairs, insurance, other expenses",
+  "Maint., rep., ins., other expenses" : "Owned dwelling maintenance, repairs, insurance, other expenses",
+  "Maintenance, rep., ins., oth. exp" : "Owned dwelling maintenance, repairs, insurance, other expenses",
+  "Maintenance, repairs, insurance, other expenses" : "Owned dwelling maintenance, repairs, insurance, other expenses",
+  "insurance, other expenses" : "Owned dwelling maintenance, repairs, insurance, other expenses",
+  "expenses" : "Owned dwelling maintenance, repairs, insurance, other expenses",
+  "Maintenance and repairs" : "Vehicle maintenance and repairs",
+  "Mortgage interest" : "Mortgage interest and charges",
+  "Mortgage principal paid, owned property" : "Mortgage principal paid on owned property",
+  "property" : "Mortgage principal paid on owned property",
+  "Other entertainment supplies, equipment and services" : "Other entertainment supplies, equipment, and services",
+  "Other ent. sup., equip., and services" : "Other entertainment supplies, equipment, and services",
+  "Other ent. supplies, equip., and services" : "Other entertainment supplies, equipment, and services",
+  "Other supplies, equip., and services" : "Other entertainment supplies, equipment, and services",
+#  "Other entertainment" : "Other entertainment supplies, equipment, and services",
+  "equipment and serv" : "Other entertainment supplies, equipment, and services",
+  "equipment,and services" : "Other entertainment supplies, equipment, and services",
+  "and services" : "Other entertainment supplies, equipment, and services",
+  #"Public and other transportation" : "Public transportation" # Is this really an alias? I can't find what year it's from
+  "Telephone services" : "Telephone"
 }
 
 serviceNames = [
-    "Income after taxes",
-    "Maintenance, repairs, insurance, other expenses",
-    "Utilities, fuels, and public services",
-    "Household operations",
-    "Maintenance and repairs",
+    "Education",
+    "Electricity",
+    "Entertainment",
+    "Fees and admissions",
+    "Food away from home",
     "Health insurance",
+    "Household operations",
+    "Income after taxes",
+    "Owned dwelling maintenance, repairs, insurance, other expenses",
+    "Vehicle maintenance and repairs",
     "Medical services",
+    "Mortgage interest and charges",
+    "Mortgage principal paid on owned property",
+    "Other entertainment supplies, equipment, and services",
+    "Other lodging",
     "Personal care products and services",
-    "Personal insurance and pensions"
+    "Personal services",
+    "Public transportation",
+    "Rented dwellings",
+    "Telephone"
     ]
 
 incomeName = "Income after taxes"    
+giftsHeader = "Gifts of goods and services"
 xlsFirstYear = 2005
 xlsLastYear = 2011
 txtFirstYear = 1984
@@ -50,13 +82,22 @@ def loadTxtPCEData(pceData):
 
                 row = line[endofname + 1:].replace('$','').replace(',','').replace('(','-').replace(')','').replace('|','').replace('n.a.','0').replace('b/','0').replace('c/','').replace('d/','').split()
                 item = line[:endofname].strip('. ')
-                if len(row) < 8 or endofname == -1 or (
-                   item not in serviceNames and item not in aliases):
+
+                if ("Gift" in item) or (len(row) > 0 and "Gift" in row[0]):
+                  break
+
+                if len(row) < 7 or endofname == -1 or (item not in serviceNames and item not in aliases):
                     continue
 
+                serviceName = item
+                if aliases.has_key(item):
+                  serviceName = aliases[item]
+            
+                if year == 1984:
+                  print serviceName
                 # We skip the first and last column, which contain "TOTAL and INCMPL"
                 values = map(float, row[1:6])
-                pceData[year][item] = values
+                pceData[year][serviceName] = values
 
 def loadXlsPCEData(pceData):
     for year in allXLSYears:
@@ -72,6 +113,11 @@ def loadXlsPCEData(pceData):
             row = sheet.row(rowIndex)
             item = row[0].value.strip()
             values = map(getVal, row[1:])
+
+            # We don't want to include gifts. Stop once we hit them.
+            if item == giftsHeader:
+              break
+
             if item not in serviceNames and item not in aliases:
                 # skip non-service rows
                 continue
@@ -112,17 +158,10 @@ def plotData(field, pceData):
     plt.savefig(filename)
     print 'saved file to %s' % filename
 
-def printAllFields():
-    pceData = loadPCEData()
-    txtPCEData = loadTxtPCEData()
+def printAllFields(pceData):
     fields = set()
 
-    for year in range(2005, 2014):
-        yearFields = pceData[year]
-        for field in yearFields:
-            fields.add(field)
-
-    for year in range(1984, 2005):
+    for year in allYears:
         yearFields = pceData[year]
         for field in yearFields:
             fields.add(field)
@@ -142,6 +181,7 @@ def convertData(pceData):
     for service in serviceNames:
       serviceValues = []
       for year in allYears:
+        print year
         serviceValues.append(pceData[year][service][i])
       groupDict[service] = serviceValues
     result[groupNames[i]] = groupDict
@@ -154,6 +194,7 @@ def main():
     cleanData = convertData(pceData)
     for service in serviceNames:
       plotData(service, cleanData)
+#    printAllFields(pceData)
 
 if __name__ == "__main__":
     main()

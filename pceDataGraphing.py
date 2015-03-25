@@ -22,20 +22,23 @@ serviceNames = [
     ]
 
 incomeName = "Income after taxes"    
-firstYear = 2005
-lastYear = 2013
+xlsFirstYear = 2005
+xlsLastYear = 2011
 txtFirstYear = 1984
 txtLastYear = 2004
-allYears = range(txtFirstYear, lastYear+1)
+firstYear = txtFirstYear
+lastYear = xlsLastYear
+allTXTYears = range(txtFirstYear, txtLastYear+1)
+allXLSYears = range(xlsFirstYear, xlsLastYear+1)
+allYears = range(firstYear, lastYear+1)
 
 def getVal(item):
     return item.value
 
-def loadTxtPCEData():
-    pceData = {}
-    for year in range(txtFirstYear, txtLastYear+1):
-        print year
+def loadTxtPCEData(pceData):
+    for year in allTXTYears:
         pceData[year] = {}
+        print "Processing", year
         with open("data/quintile%d.txt" % year, 'rb') as datafile:
             for i in range(3):
                 datafile.readline()
@@ -47,18 +50,16 @@ def loadTxtPCEData():
 
                 row = line[endofname + 1:].replace('$','').replace(',','').replace('(','-').replace(')','').replace('|','').replace('n.a.','0').replace('b/','0').replace('c/','').replace('d/','').split()
                 item = line[:endofname].strip('. ')
-                if len(row) < 8 or endofname == -1:
+                if len(row) < 8 or endofname == -1 or (
+                   item not in serviceNames and item not in aliases):
                     continue
 
                 # We skip the first and last column, which contain "TOTAL and INCMPL"
                 values = map(float, row[1:6])
                 pceData[year][item] = values
 
-    return pceData
-
-def loadPCEData():
-    pceData = {}
-    for year in range(firstYear, lastYear+1):
+def loadXlsPCEData(pceData):
+    for year in allXLSYears:
         pceData[year] = {}
         dataBook = xlrd.open_workbook(filename = ("data/quintile%d.xls" % year))
         if len(dataBook.sheets()) > 1:
@@ -147,13 +148,12 @@ def convertData(pceData):
   return result
 
 def main():
-    # pceData = loadPCEData()
-    # incomeData = isolateIncome(pceData)
-    # for field in pceData[lastYear]:
-    #   if (field != "Item") and (field != "Never attended and other"):
-    #     plotData(field, pceData)
-
-    printAllFields()
+    pceData = {}
+    loadXlsPCEData(pceData)
+    loadTxtPCEData(pceData)
+    cleanData = convertData(pceData)
+    for service in serviceNames:
+      plotData(service, cleanData)
 
 if __name__ == "__main__":
     main()

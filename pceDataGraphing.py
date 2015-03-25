@@ -22,9 +22,6 @@ aliases = {
   "Other ent. supplies, equip., and services" : "Other entertainment supplies, equipment, and services",
   "Other supplies, equip., and services" : "Other entertainment supplies, equipment, and services",
 #  "Other entertainment" : "Other entertainment supplies, equipment, and services",
-  "equipment and serv" : "Other entertainment supplies, equipment, and services",
-  "equipment,and services" : "Other entertainment supplies, equipment, and services",
-  "and services" : "Other entertainment supplies, equipment, and services",
   #"Public and other transportation" : "Public transportation" # Is this really an alias? I can't find what year it's from
   "Telephone services" : "Telephone"
 }

@@ -60,8 +60,7 @@ Average annual expenditures..................  $35,535   $37,260   $16,630   $23
         Fats and oils........................       77        78        52        66        75        94       104         73 
         Miscellaneous foods..................      388       408       234       307       382       487       626        335 
         Nonalcoholic beverages...............      231       241       154       192       230       279       349        203 
-    Food prepared by consumer unit on                                                                                         
-     out-of-town trips.......................       53        57        18        34        52        63       116         41 
+    Food prepared by consumer unit on out-of-town trips.......................       53        57        18        34        52        63       116         41 
     Food away from home......................    2,030     2,143       964     1,254     1,842     2,578     4,072      1,714 
  Alcoholic beverages.........................      309       336       169       221       278       380       630        235 
  Housing.....................................   11,713    11,841     6,168     8,183    10,304    13,184    21,336     11,313 
@@ -69,8 +68,7 @@ Average annual expenditures..................  $35,535   $37,260   $16,630   $23
       Owned dwellings........................    4,245     4,242     1,268     2,015     3,020     5,029     9,858      4,258 
         Mortgage interest and charges........    2,455     2,466       462       742     1,613     3,167     6,333      2,415 
         Property taxes.......................    1,015       989       399       647       729     1,053     2,114      1,111 
-        Maintenance, repairs, insurance,other                                                                                 
-         expenses............................      775       786       407       627       677       809     1,410        732 
+        Maintenance, repairs, insurance,other expenses............................      775       786       407       627       677       809     1,410        732 
       Rented dwellings.......................    1,978     2,008     2,031     2,429     2,429     1,960     1,193      1,867 
       Other lodging..........................      458       457       174       220       254       440     1,197        459 
   Utilities, fuels, and public services......    2,405     2,381     1,527     1,986     2,310     2,684     3,395      2,491 
@@ -91,8 +89,7 @@ Average annual expenditures..................  $35,535   $37,260   $16,630   $23
       Furniture..............................      377       387       111       249       313       392       868        343 
       Floor coverings........................      144       157        95        66       152        90       381        112 
       Major appliances.......................      164       172        83       145       169       197       267        141 
-      Small appliances, miscellaneous                                                                                         
-       housewares............................       80        87        32        50        74       106       175         58 
+      Small appliances, miscellaneous housewares............................       80        87        32        50        74       106       175         58 
       Miscellaneous household equipment......      729       773       304       339       690       951     1,578        591 
  Apparel and services........................    1,674     1,749       842       939     1,649     2,030     3,280      1,466 
     Men and boys.............................      399       412       128       192       364       495       878        368 
@@ -114,8 +111,7 @@ Average annual expenditures..................  $35,535   $37,260   $16,630   $23
       Vehicle finance charges................      319       329        80       154       313       504       591        285 
       Maintenance and repairs................      641       674       294       457       670       821     1,126        529 
       Vehicle insurance......................      739       766       292       546       728       975     1,287        639 
-   Vehicle rental, leases, licenses, other                                                                                    
-    charges..................................      507       516       113       237       353       613     1,261        474 
+   Vehicle rental, leases, licenses, other charges..................................      507       516       113       237       353       613     1,261        474 
     Public transportation....................      429       427       190       202       346       395     1,003        435 
  Health care.................................    1,903     1,973     1,220     1,971     1,771     2,086     2,815      1,660 
     Health insurance.........................      913       926       574       972       905       968     1,212        865 
@@ -126,8 +122,7 @@ Average annual expenditures..................  $35,535   $37,260   $16,630   $23
     Fees and admissions......................      449       469       160       200       322       523     1,137        380 
     Television, radios, sound equipment......      535       575       301       390       537       693       951        412 
     Pets, toys, and playground equipment.....      329       352       124       199       309       432       694        262 
-    Other entertainment supplies,                                                                                             
-     equipment,and services..................      433       428       180       147       208       548     1,058        454 
+    Other entertainment supplies, equipment, and services..................      433       428       180       147       208       548     1,058        454 
  Personal care products and services.........      401       437       281       291       363       506       743        303 
  Reading.....................................      161       170        75       114       144       188       327        129 
  Education...................................      580       580       394       284       400       567     1,252        582 
@@ -141,14 +136,10 @@ Sources of income and personal taxes: a/
     Money income before taxes................   41,622    41,622     7,170    17,962    30,981    50,205   101,602         a/ 
     Wages and salaries.......................   32,889    32,889     2,478     9,158    22,847    42,376    87,417         a/ 
     Self-employment income...................    2,239     2,239      -161       558     1,077     2,529     7,178         a/ 
-    Social Security, private and                                                                                              
-     government retirement...................    4,618     4,618     3,531     6,838     5,505     3,713     3,504         a/ 
-    Interest, dividends, rental income,                                                                                       
-     other property income...................      871       871        90       303       651       771     2,536         a/ 
-    Unemployment and workers'' compensation,                                                                                  
-     veterans'' benefits.....................      193       193        80       179       239       241       226         a/ 
-    Public assistance, supplemental security,                                                                                 
-     income, food stamps.....................      330       330       776       501       178       145        54         a/ 
+    Social Security, private and government retirement...................    4,618     4,618     3,531     6,838     5,505     3,713     3,504         a/ 
+    Interest, dividends, rental income, other property income...................      871       871        90       303       651       771     2,536         a/ 
+    Unemployment and workers'' compensation, veterans'' benefits.....................      193       193        80       179       239       241       226         a/ 
+    Public assistance, supplemental security, income, food stamps.....................      330       330       776       501       178       145        54         a/ 
     Regular contributions for support........      260       260       170       248       294       289       296         a/ 
     Other income.............................      221       221       206       176       191       141       391         a/ 
  Personal taxes..............................    3,264     3,264       120       555     1,716     3,911     9,995         a/ 
@@ -161,21 +152,17 @@ Net change in total assets and liabilities...   -1,919    -2,359       596      
     Net change in total liabilities..........    8,035     8,583     1,831     2,229     4,826    10,561    23,427      6,033 
  Other financial information:                                                                                                 
   Other money receipts.......................      463       551       346       205       381       743     1,076        142 
-    Mortgage principal paid on owned                                                                                          
-     property................................   -1,160    -1,184      -254      -356      -701    -1,317    -3,284     -1,072 
+    Mortgage principal paid on owned property................................   -1,160    -1,184      -254      -356      -701    -1,317    -3,284     -1,072 
     Estimated market value of owned home.....   80,523    79,004    36,513    48,885    60,383    83,331   165,642     86,061 
-    Estimated monthly rental value of                                                                                         
-     owned home..............................      570       564       246       377       445       621     1,126        596 
+    Estimated monthly rental value of owned home..............................      570       564       246       377       445       621     1,126        596 
  Gifts of goods and services.................    1,068     1,097       466       533       843     1,201     2,440        977 
     Food.....................................       84        84        16        36        39        86       245         85 
     Housing..................................      314       318       167       165       217       374       668        300 
       Housekeeping supplies..................       41        46        17        30        35        60        89         28 
       Household textiles.....................       16        18         8         6        13        20        44         10 
-   Appliances and miscellaneous                                                                                               
-    housewares...............................       30        32        10        16        29        37        67         23 
+   Appliances and miscellaneous housewares...............................       30        32        10        16        29        37        67         23 
         Major appliances.....................        7         8      c/ 2         3        11        11        13          5 
-    Small appliances and miscellaneous                                                                                        
-        housewares...........................       22        24         7        13        17        26        55         18 
+    Small appliances and miscellaneous housewares...........................       22        24         7        13        17        26        55         18 
       Miscellaneous household equipment......       71        76        30        27        47       108       167         55 
       Other housing..........................      156       146       103        85        92       150       300        185 
     Apparel and services.....................      225       235       120       124       227       272       431        194 

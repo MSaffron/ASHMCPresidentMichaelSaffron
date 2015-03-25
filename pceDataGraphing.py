@@ -2,6 +2,7 @@ import xlrd
 import csv
 import matplotlib as mpl
 import matplotlib.pyplot as plt
+from matplotlib.font_manager import FontProperties
 
 aliases = {
   "Income after taxes 1/" : "Income after taxes",
@@ -155,7 +156,12 @@ def plotData(field, pceData):
     for group in pceData:
         ax.plot(allYears, percentifyField(field, group, pceData))
         legendNames.append(group)
-    ax.legend(legendNames, loc=1)
+
+    fontP = FontProperties()
+    fontP.set_size('small')
+    box = ax.get_position()
+    ax.set_position([box.x0, box.y0, box.width * 0.75, box.height])
+    ax.legend(legendNames, loc='center left', bbox_to_anchor=(1, 0.5), prop=fontP)
     filename = "figures/" + field + ".png"
     plt.savefig(filename)
     print 'saved file to %s' % filename

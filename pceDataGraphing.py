@@ -11,18 +11,19 @@ aliases = {
   "Maint., rep., ins., other expenses" : "Owned dwelling maintenance, repairs, insurance, other expenses",
   "Maintenance, rep., ins., oth. exp" : "Owned dwelling maintenance, repairs, insurance, other expenses",
   "Maintenance, repairs, insurance, other expenses" : "Owned dwelling maintenance, repairs, insurance, other expenses",
-  "insurance, other expenses" : "Owned dwelling maintenance, repairs, insurance, other expenses",
-  "expenses" : "Owned dwelling maintenance, repairs, insurance, other expenses",
+  "Maintenance, repairs, insurance,other expenses" : "Owned dwelling maintenance, repairs, insurance, other expenses",
   "Maintenance and repairs" : "Vehicle maintenance and repairs",
   "Mortgage interest" : "Mortgage interest and charges",
   "Mortgage principal paid, owned property" : "Mortgage principal paid on owned property",
   "property" : "Mortgage principal paid on owned property",
   "Other entertainment supplies, equipment and services" : "Other entertainment supplies, equipment, and services",
+  "Other entertainment supplies, equipment,and services" : "Other entertainment supplies, equipment, and services",
+  "Other entertainment supplies, equipment and serv" : "Other entertainment supplies, equipment, and services",
   "Other ent. sup., equip., and services" : "Other entertainment supplies, equipment, and services",
   "Other ent. supplies, equip., and services" : "Other entertainment supplies, equipment, and services",
   "Other supplies, equip., and services" : "Other entertainment supplies, equipment, and services",
 #  "Other entertainment" : "Other entertainment supplies, equipment, and services",
-  #"Public and other transportation" : "Public transportation" # Is this really an alias? I can't find what year it's from
+  "Public and other transportation" : "Public transportation",
   "Telephone services" : "Telephone"
 }
 
@@ -90,10 +91,8 @@ def loadTxtPCEData(pceData):
                 if aliases.has_key(item):
                   serviceName = aliases[item]
             
-                if year == 1984:
-                  print serviceName
                 # We skip the first and last column, which contain "TOTAL and INCMPL"
-                values = map(float, row[1:6])
+                values = map(float, row[1:7])
                 pceData[year][serviceName] = values
 
 def loadXlsPCEData(pceData):
@@ -178,7 +177,6 @@ def convertData(pceData):
     for service in serviceNames:
       serviceValues = []
       for year in allYears:
-        print year
         serviceValues.append(pceData[year][service][i])
       groupDict[service] = serviceValues
     result[groupNames[i]] = groupDict

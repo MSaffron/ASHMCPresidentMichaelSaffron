@@ -162,6 +162,9 @@ def plotData(field, pceData):
     box = ax.get_position()
     ax.set_position([box.x0, box.y0, box.width * 0.75, box.height])
     ax.legend(legendNames, loc='center left', bbox_to_anchor=(1, 0.5), prop=fontP)
+    plt.xlabel("Year")
+    plt.ylabel("Percentage of Income")
+    plt.xlim([1984, 2011])
     filename = "figures/" + field + ".png"
     plt.savefig(filename)
     print 'saved file to %s' % filename

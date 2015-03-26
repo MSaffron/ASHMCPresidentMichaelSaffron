@@ -48,7 +48,8 @@ serviceNames = [
     "Personal services",
     "Public transportation",
     "Rented dwellings",
-    "Telephone"
+    "Telephone",
+    "Utilities, fuels, and public services"
     ]
 
 incomeName = "Income after taxes"    
@@ -165,6 +166,7 @@ def plotData(field, pceData):
     filename = "figures/" + field + ".png"
     plt.savefig(filename)
     print 'saved file to %s' % filename
+    plt.close()
 
 def printAllFields(pceData):
     fields = set()

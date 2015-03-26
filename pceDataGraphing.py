@@ -23,9 +23,12 @@ aliases = {
   "Other ent. sup., equip., and services" : "Other entertainment supplies, equipment, and services",
   "Other ent. supplies, equip., and services" : "Other entertainment supplies, equipment, and services",
   "Other supplies, equip., and services" : "Other entertainment supplies, equipment, and services",
-#  "Other entertainment" : "Other entertainment supplies, equipment, and services",
   "Public and other transportation" : "Public transportation",
-  "Telephone services" : "Telephone"
+  "Telephone services" : "Telephone",
+  # Goods:
+  "Household furnishings and equiptment" : "Household furnishings and equipment",
+  "Vehicle purchases (net outlay)" : "Vehicle purchases",
+  "Pets, toys, and playground equipment" : "Pets, toys, hobbies, and playground equipment"
 }
 
 serviceNames = [
@@ -37,11 +40,11 @@ serviceNames = [
     "Health insurance",
     "Household operations",
     "Income after taxes",
+    "Number of consumer units (in thousands)",
     "Owned dwelling maintenance, repairs, insurance, other expenses",
     "Vehicle maintenance and repairs",
     "Medical services",
     "Mortgage interest and charges",
-    "Mortgage principal paid on owned property",
     "Other entertainment supplies, equipment, and services",
     "Other lodging",
     "Personal care products and services",
@@ -49,13 +52,28 @@ serviceNames = [
     "Public transportation",
     "Rented dwellings",
     "Telephone",
-    "Utilities, fuels, and public services"
+    "Utilities, fuels, and public services",
+    "Vehicle insurance",
+    # Goods:
+    "Food at home",
+    "Alcoholic beverages",
+    "Housekeeping supplies",
+    "Household furnishings and equipment",
+    "Footwear",
+    "Vehicle purchases",
+    "Gasoline and motor oil",
+    "Drugs",
+    "Medical supplies",
+    "Pets, toys, hobbies, and playground equipment",
+    "Tobacco products and smoking supplies"
     ]
 
 incomeName = "Income after taxes"    
 giftsHeader = "Gifts of goods and services"
+incomeSourcesHeader = "Sources of income and personal taxes:"
+consumerUnits = "Number of consumer units (in thousands)"
 xlsFirstYear = 2005
-xlsLastYear = 2011
+xlsLastYear = 2013
 txtFirstYear = 1984
 txtLastYear = 2004
 firstYear = txtFirstYear
@@ -70,7 +88,6 @@ def getVal(item):
 def loadTxtPCEData(pceData):
     for year in allTXTYears:
         pceData[year] = {}
-        print "Processing", year
         with open("data/quintile%d.txt" % year, 'rb') as datafile:
             for i in range(3):
                 datafile.readline()
@@ -119,7 +136,7 @@ def loadXlsPCEData(pceData):
             values = map(getVal, row[1:])
 
             # We don't want to include gifts. Stop once we hit them.
-            if item == giftsHeader:
+            if item == giftsHeader or item == incomeSourcesHeader:
               break
 
             if item not in serviceNames and item not in aliases:
@@ -142,8 +159,18 @@ def percentifyField(field, group, data):
   income = data[group][incomeName]
   fieldData = data[group][field]
   result = []
-  for i in range(len(income)):
-    result.append(fieldData[i]/income[i])
+  for i in range(len(allYears)-2):
+    result.append(fieldData[i]/income[i] * 100)
+
+  aggData = data["All"][field]
+  consumerData = data[group][consumerUnits]
+  for i in range(len(allYears) - 2, len(allYears)):
+    if group == "All":
+      result.append(aggData[i] * 1000 / consumerData[i] / income[i] * 100)
+    else:
+      result.append(aggData[i] * 1000 * fieldData[i] / consumerData[i] / income[i])
+#  result.append(0)
+#  result.append(0)
   return result
 
 def plotData(field, pceData):

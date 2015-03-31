@@ -3,6 +3,7 @@ import csv
 import matplotlib as mpl
 import matplotlib.pyplot as plt
 from matplotlib.font_manager import FontProperties
+import numpy as np
 
 aliases = {
   "Income after taxes 1/" : "Income after taxes",
@@ -182,8 +183,12 @@ def plotData(field, pceData):
     ax.xaxis.set_major_formatter(x_formatter)
     legendNames = []
     for group in pceData:
+        data = percentifyField(field, group, pceData)
+        trend = np.poly1d((np.polyfit(allYears, data, 1)))
         ax.plot(allYears, percentifyField(field, group, pceData))
+        ax.plot(allYears, trend(allYears), 'k--')
         legendNames.append(group)
+        legendNames.append("Slope %s: %.3f" % (group, trend[1]))
 
     fontP = FontProperties()
     fontP.set_size('small')
